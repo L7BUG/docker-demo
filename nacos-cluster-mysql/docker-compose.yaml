@@ -1,0 +1,55 @@
+version: "3.8"
+services:
+  nacos1:
+    hostname: nacos1
+    container_name: nacos1
+    image: nacos/nacos-server:latest
+    volumes:
+      - ./.nacos1-logs:/home/nacos/logs
+    env_file:
+      - ./nacos-hostname.env
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  nacos2:
+    hostname: nacos2
+    image: nacos/nacos-server:latest
+    container_name: nacos2
+    volumes:
+      - ./.nacos2-logs:/home/nacos/logs
+    env_file:
+      - ./nacos-hostname.env
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+  nacos3:
+    hostname: nacos3
+    image: nacos/nacos-server:latest
+    container_name: nacos3
+    volumes:
+      - ./.nacos3-logs:/home/nacos/logs
+    env_file:
+      - ./nacos-hostname.env
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+  mysql:
+    container_name: mysql
+    image: demo/nacos-mysql:0.1
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: nacos_devtest
+      MYSQL_USER: nacos
+      MYSQL_PASSWORD: nacospassword
+    volumes:
+      - ./.mysql-data:/var/lib/mysql
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+

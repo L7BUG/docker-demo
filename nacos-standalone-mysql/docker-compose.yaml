@@ -3,10 +3,7 @@ services:
   mysql:
     restart: always
     container_name: mysql
-    build:
-      context: .
-      dockerfile: nacos-mysql-Dockerfile
-    image: example/mysql:8.0.30
+    image: demo/nacos-mysql:0.1
     environment:
       MYSQL_ROOT_PASSWORD: 123456
       MYSQL_DATABASE: nacos_devtest
