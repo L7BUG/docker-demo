@@ -7,7 +7,7 @@ services:
     volumes:
       - ./.nacos1-logs:/home/nacos/logs
     env_file:
-      - ./nacos-hostname.env
+      - nacos.env
     restart: always
     depends_on:
       mysql:
@@ -20,7 +20,7 @@ services:
     volumes:
       - ./.nacos2-logs:/home/nacos/logs
     env_file:
-      - ./nacos-hostname.env
+      - nacos.env
     restart: always
     depends_on:
       mysql:
@@ -32,7 +32,7 @@ services:
     volumes:
       - ./.nacos3-logs:/home/nacos/logs
     env_file:
-      - ./nacos-hostname.env
+      - nacos.env
     restart: always
     depends_on:
       mysql:
