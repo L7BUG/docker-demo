@@ -45,4 +45,4 @@ nbdist/
 !*/build/*.html
 !*/build/*.xml
 
-/*/.*-data/
+.*-data/

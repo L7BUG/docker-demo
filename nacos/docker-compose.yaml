@@ -1,0 +1,34 @@
+version: "3.9"
+services:
+  mysql:
+    restart: always
+    container_name: mysql
+    build:
+      context: .
+      dockerfile: nacos-mysql-Dockerfile
+    image: example/mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: nacos_devtest
+      MYSQL_USER: nacos
+      MYSQL_PASSWORD: nacospassword
+    volumes:
+      - ./.mysql-data:/var/lib/mysql
+  nacos:
+    image: nacos/nacos-server:latest
+    container_name: nacos-server
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_PLATFORM: mysql
+      MYSQL_SERVICE_HOST: mysql
+      MYSQL_SERVICE_PORT: 3306
+      MYSQL_SERVICE_DB_NAME: nacos_devtest
+      MYSQL_SERVICE_USER: nacos
+      MYSQL_SERVICE_PASSWORD: nacospassword
+      MODE: standalone # 单机模式
+      MYSQL_SERVICE_DB_PARAM: characterEncoding=utf8&connectTimeout=1000&socketTimeout=3000&autoReconnect=true&useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+#    ports:
+#      - "8848:8848" # 映射 Nacos 端口
+

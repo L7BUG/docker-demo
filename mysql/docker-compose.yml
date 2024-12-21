@@ -15,9 +15,3 @@ services:
     volumes:
       - ./.mysql-data:/var/lib/mysql  # 数据持久化路径
 #      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro  # 自定义初始化SQL脚本
-networks:
-  default:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.6.78.0/24"  # 网络子网配置
