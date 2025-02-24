@@ -1,0 +1,10 @@
+version: '3.3'
+services:
+  webos:
+    image: fs185085781/webos:latest
+    container_name: webos
+    volumes:
+      - './.root-path-data:/webos/api/rootPath'
+      - './.apps-data:/webos/web/apps'
+    ports:
+      - '8088'
