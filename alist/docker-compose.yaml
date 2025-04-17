@@ -7,8 +7,8 @@ services:
       - './.alist-data:/opt/alist/data'
     ports:
       - '5244:5244'
-    environment:
-      - PUID=0
-      - PGID=0
-      - UMASK=022
+#    environment:
+#      - PUID=0
+#      - PGID=0
+#      - UMASK=022
     restart: unless-stopped
