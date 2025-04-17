@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   alist:
-    image: 'registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/alist:0.03'
+    image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/alist:latest-aio
     container_name: alist
     volumes:
       - './.alist-data:/opt/alist/data'
