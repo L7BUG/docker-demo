@@ -1,0 +1,17 @@
+services:
+  bilibili_tool:
+    image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/bilibili-tool-pro:0.02
+    container_name: bili
+    restart: unless-stopped
+    tty: true
+    volumes:
+      - ./.app-data/Logs:/app/Logs
+      - ./.app-data/appsettings.json:/app/appsettings.json
+      - ./.app-data/cookies.json:/app/cookies.json
+    environment:
+      # 定时任务
+      - Ray_DailyTaskConfig__Cron=0 15 * * *
+      - Ray_LiveLotteryTaskConfig__Cron=0 22 * * *
+      - Ray_UnfollowBatchedTaskConfig__Cron=0 6 1 * *
+      - Ray_VipBigPointConfig__Cron=7 1 * * *
+      - Ray_LiveFansMedalTaskConfig__Cron=5 0 * * *
