@@ -10,12 +10,3 @@ services:
     restart: always  # 容器异常退出时自动重启
     volumes:
       - ./.trilium-data:/home/node/trilium-data  # 将本地的 trilium-data 持久化到容器
-    networks:
-      default:
-        ipv4_address: 172.67.8.9  # 分配固定 IP 地址
-networks:
-  default:
-    ipam:
-      driver: default
-      config:
-        - subnet: "172.67.8.0/24"  # 网络子网配置
