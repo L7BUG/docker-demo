@@ -4,7 +4,7 @@ version: "3.9"
 services:
   trilium:
     ports:
-      - 8080
+      - "10086:8080"
     image: registry.cn-shenzhen.aliyuncs.com/public-image-l/trilium:latest  # 使用 trilium 镜像
     container_name: trilium  # 容器名称
     restart: always  # 容器异常退出时自动重启
