@@ -1,6 +1,6 @@
 services:
   bilibili_tool:
-    image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/bilibili-tool-pro:0.02
+    image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/bilibili-tool:0.01
     container_name: bili
     restart: unless-stopped
     tty: true
