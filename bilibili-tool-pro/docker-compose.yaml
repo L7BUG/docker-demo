@@ -9,8 +9,9 @@ services:
       - ./.app-data/appsettings.json:/app/appsettings.json
       - ./.app-data/cookies.json:/app/cookies.json
     environment:
-      Ray_BiliBiliCookies: somecookies
-      Ray_Crontab: |
-        0 6 * * * dotnet /app/Ray.BiliBiliTool.Console.dll --runTasks=Daily >> /var/log/cron.log
-        30 6 * * * dotnet /app/Ray.BiliBiliTool.Console.dll --runTasks=VipBigPoint >> /var/log/cron.log
-        30 15,21 * * * dotnet /app/Ray.BiliBiliTool.Console.dll --runTasks=LiveFansMedal >> /var/log/cron.log
+      # 定时任务
+      - Ray_DailyTaskConfig__Cron=0 6 * * *
+#      - Ray_LiveLotteryTaskConfig__Cron=0 22 * * *
+#      - Ray_UnfollowBatchedTaskConfig__Cron=0 6 1 * *
+      - Ray_VipBigPointConfig__Cron=0 7 * * *
+      - Ray_LiveFansMedalTaskConfig__Cron=30 15,21 * * *
