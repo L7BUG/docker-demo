@@ -9,7 +9,6 @@ services:
       - "6379:26379"      # 暴露默认端口
     volumes:
       - ./data:/data              # 数据持久化目录
-      - ./config/redis.conf:/usr/local/etc/redis/redis.conf  # 自定义配置文件
     command: redis-server /usr/local/etc/redis/redis.conf
     environment:
       - TZ=Asia/Shanghai         # 时区设置
