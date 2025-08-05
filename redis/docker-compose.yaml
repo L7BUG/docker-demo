@@ -6,7 +6,7 @@ services:
         container_name: redis-test
         restart: unless-stopped
         ports:
-            - "6379:26379"      # 暴露默认端口
+            - "26379:6379"      # 暴露默认端口
         volumes:
             - ./.data:/data              # 数据持久化目录
         environment:
