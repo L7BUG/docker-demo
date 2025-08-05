@@ -11,6 +11,5 @@ services:
             - ./.data:/data              # 数据持久化目录
         environment:
             - TZ=Asia/Shanghai         # 时区设置
-            - REDIS_PASSWORD=test1234   # 测试环境密码（按需修改）
         sysctls: # 性能优化参数
             - net.core.somaxconn=1024
