@@ -8,8 +8,7 @@ services:
         ports:
             - "6379:26379"      # 暴露默认端口
         volumes:
-            - ./data:/data              # 数据持久化目录
-        command: redis-server /usr/local/etc/redis/redis.conf
+            - ./.data:/data              # 数据持久化目录
         environment:
             - TZ=Asia/Shanghai         # 时区设置
             - REDIS_PASSWORD=test1234   # 测试环境密码（按需修改）
