@@ -4,9 +4,9 @@ services:
     redis:
         image: registry.cn-shenzhen.aliyuncs.com/public-image-l/redis
         container_name: redis-test
-        restart: unless-stopped
+        restart: always  # 容器异常退出时自动重启
         ports:
-            - "26379:6379"      # 暴露默认端口
+            - "6379:6379"      # 暴露默认端口
         volumes:
             - ./.data:/data              # 数据持久化目录
         environment:
