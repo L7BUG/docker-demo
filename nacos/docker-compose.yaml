@@ -8,5 +8,3 @@ services:
             - "9848:9848"                               # gRPC端口
         environment:
             MODE: standalone                            # 单机模式
-        volumes:
-            - ./.nacos-logs:/home/nacos/logs        # 日志持久化
