@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+    nacos:
+        image: nacos/nacos-server
+        container_name: nacos-standalone
+        ports:
+            - "8848:8848"                               # 控制台端口
+            - "9848:9848"                               # gRPC端口
+        environment:
+            MODE: standalone                            # 单机模式
+        volumes:
+            - ./.nacos-logs:/home/nacos/logs        # 日志持久化

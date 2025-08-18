@@ -1,0 +1,39 @@
+version: '3.8'
+services:
+    one-coupon-postgres:
+        image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/postgres  # 推荐使用特定版本（如Alpine减小体积）
+        environment:
+            POSTGRES_USER: admin           # 管理员用户名
+            POSTGRES_PASSWORD: 123456  # 强密码建议
+            TZ: Asia/Shanghai              # 时区设置
+        volumes:
+            - postgres_data:/var/lib/postgresql/data  # 核心数据持久化
+        ports:
+            - "17000:5432"  # 主机端口:容器端口
+        networks:
+            - one-coupon-network
+        healthcheck: # 健康状态检测
+            test: [ "CMD-SHELL", "pg_isready -U admin" ]
+            interval: 5s
+            timeout: 3s
+            retries: 5
+        restart: unless-stopped  # 异常时自动重启
+
+    one-coupon-redis:
+        image: registry.cn-shenzhen.aliyuncs.com/public-image-l/redis
+        restart: unless-stopped  # 异常时自动重启
+        ports:
+            - "17001:6379"      # 暴露默认端口
+        volumes:
+            - one-coupon-redis-data:/data              # 数据持久化目录
+        environment:
+            - TZ=Asia/Shanghai         # 时区设置
+        networks:
+            - one-coupon-network
+volumes:
+    one-coupon-postgres-data:  # 命名卷确保数据安全
+    one-coupon-redis-data:  # 命名卷确保数据安全
+
+networks:
+    one-coupon-network: # 隔离网络提升安全性
+        driver: bridge
