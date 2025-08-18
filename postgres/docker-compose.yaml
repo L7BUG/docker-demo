@@ -1,0 +1,28 @@
+version: '3.8'
+services:
+    postgres:
+        image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/postgres  # 推荐使用特定版本（如Alpine减小体积）
+        container_name: postgres_db
+        environment:
+            POSTGRES_USER: admin           # 管理员用户名
+            POSTGRES_PASSWORD: 123456  # 强密码建议
+            TZ: Asia/Shanghai              # 时区设置
+        volumes:
+            - postgres_data:/var/lib/postgresql/data  # 核心数据持久化
+        ports:
+            - "17000:5432"  # 主机端口:容器端口
+        networks:
+            - my-network
+        healthcheck:  # 健康状态检测
+            test: ["CMD-SHELL", "pg_isready -U admin"]
+            interval: 5s
+            timeout: 3s
+            retries: 5
+        restart: unless-stopped  # 异常时自动重启
+
+volumes:
+    postgres_data:  # 命名卷确保数据安全
+
+networks:
+    my-network:  # 隔离网络提升安全性
+        driver: bridge
