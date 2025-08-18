@@ -7,4 +7,5 @@ services:
             - "8848:8848"                               # 控制台端口
             - "9848:9848"                               # gRPC端口
         environment:
-            MODE: standalone                            # 单机模式
+            - MODE=standalone
+            - NACOS_AUTH_ENABLE=false
