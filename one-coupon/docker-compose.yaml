@@ -1,7 +1,7 @@
 version: '3.8'
 services:
     one-coupon-postgres:
-        image: registry.cn-shenzhen.aliyuncs.com/l7-bug-tool/postgres  # 推荐使用特定版本（如Alpine减小体积）
+        image: postgres:16  # 官方最新稳定版
         environment:
             POSTGRES_USER: admin           # 管理员用户名
             POSTGRES_PASSWORD: 123456  # 强密码建议
