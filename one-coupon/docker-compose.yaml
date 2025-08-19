@@ -6,6 +6,7 @@ services:
             POSTGRES_USER: admin           # 管理员用户名
             POSTGRES_PASSWORD: 123456  # 强密码建议
             TZ: Asia/Shanghai              # 时区设置
+            PGTZ: Asia/Shanghai                # 显式设置 PostgreSQL 时区（双重保障）[8](@ref)
         volumes:
             - one-coupon-postgres-data:/var/lib/postgresql/data  # 核心数据持久化
         ports:
@@ -40,14 +41,16 @@ services:
             - "17002:8848"                 # Web控制台端口
             - "17003:9848"                 # gRPC通信端口（Nacos 2.0+必需）
         volumes:
-            - ./.nacos-data:/home/nacos/data     # 数据持久化目录
-            - ./.nacos-logs:/home/nacos/logs     # 日志持久化目录
+            - one-coupon-nacos-data:/home/nacos/data     # 数据持久化目录
+            - one-coupon-nacos-log:/home/nacos/logs     # 日志持久化目录
         restart: always                 # 自动重启保障服务可用性
         networks:
             - one-coupon-network
 volumes:
     one-coupon-postgres-data:  # 命名卷确保数据安全
     one-coupon-redis-data:  # 命名卷确保数据安全
+    one-coupon-nacos-data:  # 命名卷确保数据安全
+    one-coupon-nacos-log:  # 命名卷确保数据安全
 
 networks:
     one-coupon-network: # 隔离网络提升安全性
