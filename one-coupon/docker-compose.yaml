@@ -17,11 +17,11 @@ services:
             interval: 5s
             timeout: 3s
             retries: 5
-        restart: unless-stopped  # 异常时自动重启
+        restart: always                 # 自动重启保障服务可用性
 
     one-coupon-redis:
         image: registry.cn-shenzhen.aliyuncs.com/public-image-l/redis
-        restart: unless-stopped  # 异常时自动重启
+        restart: always                 # 自动重启保障服务可用性
         ports:
             - "17001:6379"      # 暴露默认端口
         volumes:
@@ -30,6 +30,19 @@ services:
             - TZ=Asia/Shanghai         # 时区设置
         networks:
             - one-coupon-network
+
+    nacos:
+        image: nacos/nacos-server:v2.2.3  # 推荐指定版本号
+        environment:
+            - MODE=standalone             # 关键！指定单机模式
+            - PREFER_HOST_MODE=hostname   # 避免IP识别问题
+        ports:
+            - "17002:8848"                 # Web控制台端口
+            - "17003:9848"                 # gRPC通信端口（Nacos 2.0+必需）
+        volumes:
+            - ./.nacos-data:/home/nacos/data     # 数据持久化目录
+            - ./.nacos-logs:/home/nacos/logs     # 日志持久化目录
+        restart: always                 # 自动重启保障服务可用性
 volumes:
     one-coupon-postgres-data:  # 命名卷确保数据安全
     one-coupon-redis-data:  # 命名卷确保数据安全
