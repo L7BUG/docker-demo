@@ -31,7 +31,7 @@ services:
         networks:
             - one-coupon-network
 
-    nacos:
+    one-coupon-nacos:
         image: nacos/nacos-server:v2.2.3  # 推荐指定版本号
         environment:
             - MODE=standalone             # 关键！指定单机模式
