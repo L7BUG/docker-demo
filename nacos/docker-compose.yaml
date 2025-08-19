@@ -10,6 +10,6 @@ services:
             - "8848:8848"                 # Web控制台端口
             - "9848:9848"                 # gRPC通信端口（Nacos 2.0+必需）
         volumes:
-            - ./data:/home/nacos/data     # 数据持久化目录
-            - ./logs:/home/nacos/logs     # 日志持久化目录
+            - ./.nacos-data:/home/nacos/data     # 数据持久化目录
+            - ./.nacos-logs:/home/nacos/logs     # 日志持久化目录
         restart: always                 # 自动重启保障服务可用性
