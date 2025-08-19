@@ -43,6 +43,8 @@ services:
             - ./.nacos-data:/home/nacos/data     # 数据持久化目录
             - ./.nacos-logs:/home/nacos/logs     # 日志持久化目录
         restart: always                 # 自动重启保障服务可用性
+        networks:
+            - one-coupon-network
 volumes:
     one-coupon-postgres-data:  # 命名卷确保数据安全
     one-coupon-redis-data:  # 命名卷确保数据安全
