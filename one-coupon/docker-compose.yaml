@@ -7,7 +7,7 @@ services:
             POSTGRES_PASSWORD: 123456  # 强密码建议
             TZ: Asia/Shanghai              # 时区设置
         volumes:
-            - postgres_data:/var/lib/postgresql/data  # 核心数据持久化
+            - one-coupon-postgres-data:/var/lib/postgresql/data  # 核心数据持久化
         ports:
             - "17000:5432"  # 主机端口:容器端口
         networks:
