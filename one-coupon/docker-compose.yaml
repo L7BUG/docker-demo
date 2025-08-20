@@ -10,7 +10,7 @@ services:
         volumes:
             - one-coupon-postgres-data:/var/lib/postgresql/data  # 核心数据持久化
         ports:
-            - "17000:5432"  # 主机端口:容器端口
+            - "15432:5432"  # 主机端口:容器端口
         networks:
             - one-coupon-network
         healthcheck: # 健康状态检测
@@ -24,7 +24,7 @@ services:
         image: registry.cn-shenzhen.aliyuncs.com/public-image-l/redis
         restart: always                 # 自动重启保障服务可用性
         ports:
-            - "17001:6379"      # 暴露默认端口
+            - "16379:6379"      # 暴露默认端口
         volumes:
             - one-coupon-redis-data:/data              # 数据持久化目录
         environment:
@@ -38,8 +38,8 @@ services:
             - MODE=standalone             # 关键！指定单机模式
             - PREFER_HOST_MODE=hostname   # 避免IP识别问题
         ports:
-            - "17002:8848"                 # Web控制台端口
-            - "17003:9848"                 # gRPC通信端口（Nacos 2.0+必需）
+            - "18848:8848"                 # Web控制台端口
+            - "19848:9848"                 # gRPC通信端口（Nacos 2.0+必需）
         volumes:
             - one-coupon-nacos-data:/home/nacos/data     # 数据持久化目录
             - one-coupon-nacos-log:/home/nacos/logs     # 日志持久化目录
