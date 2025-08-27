@@ -1,0 +1,47 @@
+version: '3.8'
+services:
+    namesrv:
+        image: apache/rocketmq:5.3.1
+        container_name: rmqnamesrv
+        ports:
+            - "9876:9876"  # NameServer 服务端口
+        environment:
+            - JAVA_OPTS=-Duser.home=/opt
+        command: sh mqnamesrv
+        networks:
+            - rocketmq-net
+        restart: always
+
+    broker:
+        image: apache/rocketmq:5.3.1
+        container_name: rmqbroker
+        ports:
+            - "10909:10909"  # Broker 监控端口
+            - "10911:10911"  # Broker 主服务端口
+            - "10912:10912"  # HA 高可用端口
+        environment:
+            - NAMESRV_ADDR=rmqnamesrv:9876  # 指向 NameServer
+            - JAVA_OPTS=-Drocketmq.broker.id=0
+        depends_on:
+            - namesrv
+        command: sh mqbroker
+        networks:
+            - rocketmq-net
+        restart: always
+
+    dashboard:
+        image: apacherocketmq/rocketmq-dashboard:latest
+        container_name: rocketmq-dashboard
+        ports:
+            - "18080:8080"  # 控制台访问端口
+        environment:
+            - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
+        depends_on:
+            - namesrv
+        networks:
+            - rocketmq-net
+        restart: always
+
+networks:
+    rocketmq-net:
+        driver: bridge
