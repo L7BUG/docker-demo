@@ -33,7 +33,7 @@ services:
         image: apacherocketmq/rocketmq-dashboard:latest
         container_name: rocketmq-dashboard
         ports:
-            - "8080:8080"  # 控制台访问端口
+            - "8082:8082"  # 控制台访问端口
         environment:
             - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
         depends_on:
