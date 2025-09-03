@@ -8,8 +8,6 @@ services:
             - "8082:8082"  # 控制台访问端口
         environment:
             - JAVA_OPTS=-Drocketmq.namesrv.addr=rmqnamesrv:9876 -Dcom.rocketmq.sendMessageWithVIPChannel=false
-        depends_on:
-            - namesrv
         networks:
             - rocketmq-net
         restart: always
