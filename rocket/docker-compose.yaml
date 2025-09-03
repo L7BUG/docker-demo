@@ -28,7 +28,3 @@ services:
         networks:
             - rocketmq-net
         restart: always
-
-networks:
-    rocketmq-net:
-        driver: bridge
