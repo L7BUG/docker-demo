@@ -28,3 +28,6 @@ services:
         networks:
             - rocketmq-net
         restart: always
+networks:
+    rocketmq-net:
+        external: true  # 关键：声明此网络已在外部创建
