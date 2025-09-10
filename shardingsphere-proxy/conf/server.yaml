@@ -4,7 +4,7 @@ mode:
     repository:
         type: JDBC
         props:
-            jdbcUrl: jdbc:h2:./tmp/shardingsphere;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;MODE=postgresql
+            jdbcUrl: jdbc:h2:./tmp/shardingsphere;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;MODE=MySql
             user: sa
             password:
 
