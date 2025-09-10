@@ -54,4 +54,4 @@ volumes:
 
 networks:
     one-coupon-network: # 隔离网络提升安全性
-        driver: bridge
+        external: true  # 关键：声明此网络已在外部创建

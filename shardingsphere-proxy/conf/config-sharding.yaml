@@ -1,0 +1,60 @@
+# config-sharding.yaml
+databaseName: sharding_db # 逻辑数据库名称，客户端连接时使用
+
+dataSources:
+    ds_0:
+        driverClassName: org.postgresql.Driver
+        jdbcUrl: jdbc:postgresql://one-coupon-postgres:5432/one_coupon_rebuild_0?TimeZone=Asia/Shanghai&stringtype=unspecified
+        username: admin
+        password: 123456
+    ds_1:
+        driverClassName: org.postgresql.Driver
+        jdbcUrl: jdbc:postgresql://one-coupon-postgres:5432/one_coupon_rebuild_1?TimeZone=Asia/Shanghai&stringtype=unspecified
+        username: admin
+        password: 123456
+
+rules:
+    - !SHARDING
+        tables:
+            t_coupon_template: # 全小写
+                actualDataNodes: ds_${0..1}.t_coupon_template_${0..15}
+                databaseStrategy: # 分库策略
+                    standard: # 单分片键分库
+                        shardingColumn: shop_number # 分片键
+                        shardingAlgorithmName: coupon_template_database_mod # 库分片算法名称，对应 rules[0].shardingAlgorithms
+                tableStrategy: # 分表策略
+                    standard: # 单分片键分表
+                        shardingColumn: shop_number # 分片键
+                        shardingAlgorithmName: coupon_template_table_mod # 表分片算法名称，对应 rules[0].shardingAlgorithms
+            t_coupon_template_log:
+                actualDataNodes: ds_${0..1}.t_coupon_template_log_${0..15}
+                databaseStrategy:
+                    standard:
+                        shardingColumn: shop_number
+                        shardingAlgorithmName: coupon_template_database_mod
+                tableStrategy:
+                    standard:
+                        shardingColumn: shop_number
+                        shardingAlgorithmName: coupon_template_table_mod
+        shardingAlgorithms:
+            coupon_template_database_mod: # 优惠券分库算法定义
+                type: CLASS_BASED # 根据自定义库分片算法类进行分片
+                props: # 分片相关属性
+                    # 自定义库分片算法Class
+                    algorithmClassName: com.l7bug.onecoupon.merchant.admin.dao.sharding.DBHashModShardingAlgorithm
+                    sharding-count: 16 # 分片总数量
+                    strategy: standard # 分片类型，单字段分片
+            coupon_template_table_mod: # 优惠券分表算法定义
+                type: CLASS_BASED # 根据自定义库分片算法类进行分片
+                props: # 分片相关属性
+                    # 自定义表分片算法Class
+                    algorithmClassName: com.l7bug.onecoupon.merchant.admin.dao.sharding.TableHashModShardingAlgorithm
+                    strategy: standard # 分片类型，单字段分片
+props:
+    sql-show: true
+    sql-simple: false
+    check-table-metadata-enabled: false
+    log:
+        level:
+            root: debug
+            org.apache.shardingsphere: trace

@@ -1,0 +1,24 @@
+# server.yaml
+mode:
+    type: Standalone # 单机模式（生产环境可考虑 Cluster 集群模式）
+    repository:
+        type: JDBC
+        props:
+            jdbcUrl: jdbc:h2:./tmp/shardingsphere;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;MODE=postgresql
+            user: sa
+            password:
+
+authority: # 权限配置，定义连接Proxy的用户名和密码
+    users:
+        - user: root@%    # 用户名格式：用户名@主机（%表示任意主机）
+          password: root  # 密码
+    privilege:
+        type: ALL_PERMITTED # 授予所有权限
+
+props: # 全局属性
+    sql-show: true # 在日志中打印SQL，调试时非常有用
+    # proxy-frontend-database-protocol-type: MySQL # 明确指定前端协议为MySQL
+    # sql-comment-parse-enabled: true
+    # check-table-metadata-enabled: false
+    # kernel-executor-size: 16  # 默认值，可根据CPU核心数调整
+    # proxy-frontend-flush-threshold: 128  # 默认值

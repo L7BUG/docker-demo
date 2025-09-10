@@ -5,7 +5,16 @@ services:
         image: apache/shardingsphere-proxy:latest
         container_name: sharding-sphere-proxy
         restart: always  # 容器异常退出时自动重启
+        ports:
+            - "13308:3308"                 # Web控制台端口
         volumes:
-            - ./.conf-data:/opt/shardingsphere-proxy/conf              # 数据持久化目录
+            - ./conf:/opt/shardingsphere-proxy/conf              # 数据持久化目录
+            - ./ext-lib:/opt/shardingsphere-proxy/ext-lib              # 数据持久化目录
         environment:
-            - entrypoint=bash
+            - PORT=3308
+
+
+
+networks:
+    one-coupon-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
