@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+    sharding-sphere-proxy:
+        image: apache/shardingsphere-proxy:latest
+        container_name: sharding-sphere-proxy
+        restart: always  # 容器异常退出时自动重启
+        volumes:
+            - ./.data:/opt              # 数据持久化目录
