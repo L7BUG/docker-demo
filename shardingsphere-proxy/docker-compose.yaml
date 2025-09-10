@@ -7,3 +7,5 @@ services:
         restart: always  # 容器异常退出时自动重启
         volumes:
             - ./.data:/opt              # 数据持久化目录
+        environment:
+            - entrypoint=bash
