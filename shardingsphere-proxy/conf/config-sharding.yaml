@@ -50,11 +50,3 @@ rules:
                     # 自定义表分片算法Class
                     algorithmClassName: com.l7bug.onecoupon.merchant.admin.dao.sharding.TableHashModShardingAlgorithm
                     strategy: standard # 分片类型，单字段分片
-props:
-    sql-show: true
-    sql-simple: false
-    check-table-metadata-enabled: false
-    log:
-        level:
-            root: debug
-            org.apache.shardingsphere: trace

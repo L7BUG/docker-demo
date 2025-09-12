@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
     sharding-sphere-proxy:
-        image: apache/shardingsphere-proxy:latest
+        image: apache/shardingsphere-proxy:5.5.0
         container_name: sharding-sphere-proxy
         restart: always  # 容器异常退出时自动重启
         ports:
