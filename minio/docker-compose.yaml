@@ -8,8 +8,8 @@ services:
             - "19000:9000" # MinIO API 端口，用于 S3 兼容接口（上传/下载文件）
             - "19001:9001" # MinIO 控制台端口（Web 管理界面）
         environment:
-            MINIO_ROOT_USER: admin # 管理员用户名，生产环境请务必修改
-            MINIO_ROOT_PASSWORD: 123456 # 管理员密码，生产环境请务必使用强密码
+            MINIO_ROOT_USER: minio_admin # 管理员用户名，生产环境请务必修改
+            MINIO_ROOT_PASSWORD: 123456789 # 管理员密码，生产环境请务必使用强密码
             TZ: Asia/Shanghai # 可选：设置容器时区
         volumes:
             # 单机模式：挂载一个数据目录
