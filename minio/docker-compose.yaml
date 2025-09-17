@@ -20,10 +20,9 @@ services:
         networks:
             - minio-net
 
-# 定义网络，便于其他容器访问
 networks:
-    minio-net:
-        driver: bridge
+    one-coupon-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
 
 volumes:
     minio-data:
