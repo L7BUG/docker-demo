@@ -7,6 +7,8 @@ services:
         networks:
             - one-coupon-network
         restart: always                 # 自动重启保障服务可用性
+        ports:
+            - "9999"      # 暴露默认端口
 
 networks:
     one-coupon-network: # 隔离网络提升安全性
