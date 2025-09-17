@@ -18,7 +18,7 @@ services:
         # 多磁盘模式的启动命令（需与卷挂载匹配）[2](@ref)
         # command: server http://minio/data{1...4} --console-address ":9001"
         networks:
-            - minio-net
+            - one-coupon-network
 
 networks:
     one-coupon-network: # 隔离网络提升安全性
