@@ -1,6 +1,6 @@
 version: '3.8'
 services:
-    one-coupon-file:
+    one-coupon-gateway:
         image: one-coupon-gateway:1.0-SNAPSHOT
         environment:
             TZ: Asia/Shanghai              # 时区设置
