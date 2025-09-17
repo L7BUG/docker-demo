@@ -2,13 +2,17 @@ version: '3.8'
 services:
     one-coupon-file:
         image: one-coupon-file:1.0-SNAPSHOT
+        container_name: one-coupon-file
+        network_mode: "host"
         environment:
             TZ: Asia/Shanghai              # 时区设置
         networks:
-            - one-coupon-network
+            one-coupon-network:
+                aliases:
+                    - one-coupon-file
         restart: always                 # 自动重启保障服务可用性
         ports:
-            - "9999"      # 暴露默认端口
+            - "19999"
 
 networks:
     one-coupon-network: # 隔离网络提升安全性
