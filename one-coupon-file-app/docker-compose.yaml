@@ -3,12 +3,7 @@ services:
     one-coupon-file:
         image: one-coupon-file:1.0-SNAPSHOT
         container_name: one-coupon-file
+        network_mode: "host"
         environment:
             TZ: Asia/Shanghai              # 时区设置
-        networks:
-            one-coupon-network:
         restart: always                 # 自动重启保障服务可用性
-
-networks:
-    one-coupon-network: # 隔离网络提升安全性
-        external: true  # 关键：声明此网络已在外部创建
