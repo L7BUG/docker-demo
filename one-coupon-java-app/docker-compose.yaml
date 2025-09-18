@@ -6,11 +6,17 @@ services:
         network_mode: "host"
         environment:
             TZ: Asia/Shanghai
+#            SPRING_PROFILES_ACTIVE: docker
         restart: always
     one-coupon-app-log:
-        image: one-coupon-app-log:1.0-SNAPSHOT
+        image: one-coupon/app-log:1.0-SNAPSHOT
         container_name: one-coupon-app-log
-        network_mode: "host"
+        networks:
+            - one-coupon-network
         environment:
             TZ: Asia/Shanghai
         restart: always
+
+networks:
+    one-coupon-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
