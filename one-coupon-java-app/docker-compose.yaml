@@ -11,8 +11,7 @@ services:
     one-coupon-app-log:
         image: one-coupon/app-log:1.0-SNAPSHOT
         container_name: one-coupon-app-log
-        networks:
-            - one-coupon-network
+        network_mode: "host"
         environment:
             TZ: Asia/Shanghai
         restart: always
