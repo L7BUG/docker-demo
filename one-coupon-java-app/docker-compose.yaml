@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+    one-coupon-file:
+        image: one-coupon-file:1.0-SNAPSHOT
+        container_name: one-coupon-file
+        network_mode: "host"
+        environment:
+            TZ: Asia/Shanghai
+        restart: always
+    one-coupon-app-log:
+        image: one-coupon-app-log:1.0-SNAPSHOT
+        container_name: one-coupon-app-log
+        network_mode: "host"
+        environment:
+            TZ: Asia/Shanghai
+        restart: always

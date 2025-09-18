@@ -1,9 +1,0 @@
-version: '3.8'
-services:
-    one-coupon-file:
-        image: one-coupon-file:1.0-SNAPSHOT
-        container_name: one-coupon-file
-        network_mode: "host"
-        environment:
-            TZ: Asia/Shanghai              # 时区设置
-        restart: always                 # 自动重启保障服务可用性
