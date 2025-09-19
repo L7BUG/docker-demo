@@ -21,7 +21,7 @@ services:
         network_mode: "host"
         environment:
             TZ: Asia/Shanghai
-            SPRING_PROFILES_ACTIVE: dev
+            SPRING_PROFILES_ACTIVE: docker
         restart: always
 
 networks:
