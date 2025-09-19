@@ -16,8 +16,8 @@ services:
             TZ: Asia/Shanghai
         restart: always
     one-coupon-gateway:
-        image: one-coupon-gateway:1.0-SNAPSHOT
-        container_name: one-coupon/gateway
+        image: one-coupon/gateway:1.0-SNAPSHOT
+        container_name: one-coupon-gateway
         network_mode: "host"
         environment:
             TZ: Asia/Shanghai
