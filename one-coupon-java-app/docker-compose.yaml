@@ -21,6 +21,7 @@ services:
         network_mode: "host"
         environment:
             TZ: Asia/Shanghai
+            SPRING_PROFILES_ACTIVE: dev
         restart: always
 
 networks:
