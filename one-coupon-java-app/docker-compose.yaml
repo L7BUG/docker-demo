@@ -9,7 +9,7 @@ services:
             SPRING_PROFILES_ACTIVE: docker-host
         restart: always
         volumes:
-            - one-coupon-file-volumes:/tmp/logs
+            - one-coupon-file-volumes:/tmp/logs/file-service
     one-coupon-app-log:
         image: one-coupon/app-log:1.0-SNAPSHOT
         container_name: one-coupon-app-log
@@ -18,7 +18,7 @@ services:
             TZ: Asia/Shanghai
         restart: always
         volumes:
-            - one-coupon-app-log-volumes:/tmp/logs
+            - one-coupon-app-log-volumes:/tmp/logs/app-log
     one-coupon-gateway:
         image: one-coupon/gateway:1.0-SNAPSHOT
         container_name: one-coupon-gateway
@@ -28,7 +28,7 @@ services:
             SPRING_PROFILES_ACTIVE: docker
         restart: always
         volumes:
-            - one-coupon-gateway-volumes:/tmp/logs
+            - one-coupon-gateway-volumes:/tmp/logs/gateway
 volumes:
     one-coupon-file-volumes:
     one-coupon-app-log-volumes:
