@@ -8,8 +8,6 @@ services:
             TZ: Asia/Shanghai
             SPRING_PROFILES_ACTIVE: docker-host
         restart: always
-        volumes:
-            - one-coupon-file-volumes:/tmp/logs/file-service
     one-coupon-app-log:
         image: one-coupon/app-log:1.0-SNAPSHOT
         container_name: one-coupon-app-log
@@ -17,8 +15,6 @@ services:
         environment:
             TZ: Asia/Shanghai
         restart: always
-        volumes:
-            - one-coupon-app-log-volumes:/tmp/logs/app-log
     one-coupon-gateway:
         image: one-coupon/gateway:1.0-SNAPSHOT
         container_name: one-coupon-gateway
@@ -27,12 +23,6 @@ services:
             TZ: Asia/Shanghai
             SPRING_PROFILES_ACTIVE: docker
         restart: always
-        volumes:
-            - one-coupon-gateway-volumes:/tmp/logs/gateway
-volumes:
-    one-coupon-file-volumes:
-    one-coupon-app-log-volumes:
-    one-coupon-gateway-volumes:
 networks:
     one-coupon-network: # 隔离网络提升安全性
         external: true  # 关键：声明此网络已在外部创建
