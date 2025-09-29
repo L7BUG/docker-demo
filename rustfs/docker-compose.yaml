@@ -9,7 +9,7 @@ services:
         environment:
             RUSTFS_ACCESS_KEY: admin
             RUSTFS_SECRET_KEY: 123456789
-            RUSTFS_CONSOLE_ENABLE: true
+            RUSTFS_CONSOLE_ENABLE: "true"
             TZ: Asia/Shanghai
         volumes:
             - rustfs-data:/data
