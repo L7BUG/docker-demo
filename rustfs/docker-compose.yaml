@@ -1,0 +1,24 @@
+version: '3.8'
+services:
+    rustfs:
+        image: rustfs/rustfs:latest
+        container_name: rustfs
+        restart: unless-stopped # 容器退出时总是重启，确保服务高可用
+        ports:
+            - "19000:9000"
+        environment:
+            RUSTFS_ACCESS_KEY: admin
+            RUSTFS_SECRET_KEY: 123456789
+            RUSTFS_CONSOLE_ENABLE: true
+            TZ: Asia/Shanghai
+        volumes:
+            - rustfs-data:/data
+        networks:
+            - one-coupon-network
+
+networks:
+    one-coupon-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
+
+volumes:
+    rustfs-data:
