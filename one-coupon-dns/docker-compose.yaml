@@ -1,0 +1,9 @@
+version: '3.8'
+services:
+    one-coupon-dns:
+        image: one-coupon/dns-demo:1.0-SNAPSHOT
+        container_name: one-coupon-dns
+        network_mode: "host"
+        environment:
+            TZ: Asia/Shanghai
+        restart: always
