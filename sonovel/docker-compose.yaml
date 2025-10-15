@@ -1,0 +1,14 @@
+services:
+    sonovel:
+        image: ghcr.io/freeok/sonovel:latest
+        container_name: sonovel
+        ports:
+            - "17765:7765"
+        environment:
+            JAVA_OPTS: "-Dmode=web"
+        volumes:
+            - sonovel_data:/sonovel
+        restart: unless-stopped
+
+volumes:
+    sonovel_data:
