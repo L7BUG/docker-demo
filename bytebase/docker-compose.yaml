@@ -4,10 +4,12 @@ services:
         container_name: bytebase
         ports:
             - "28080:8080"
-        network_mode: "host"
         volumes:
             - bytebase:/var/opt/bytebase
         restart: unless-stopped
 
 volumes:
     bytebase:
+networks:
+    one-coupon-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
