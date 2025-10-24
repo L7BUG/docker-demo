@@ -7,6 +7,8 @@ services:
         volumes:
             - bytebase:/var/opt/bytebase
         restart: unless-stopped
+        networks:
+            - one-coupon-network
 
 volumes:
     bytebase:
