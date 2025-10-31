@@ -1,0 +1,8 @@
+version: "3"
+services:
+    # 在这里给容器起一个名字, 例如 sakura1
+    sakura:
+        image: registry.cn-hongkong.aliyuncs.com/natfrp/frpc
+        restart: always
+        network_mode: host
+        command: --disable_log_color -f egtifakvnl6cqphr
