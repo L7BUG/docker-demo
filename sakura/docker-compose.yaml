@@ -5,4 +5,4 @@ services:
         image: registry.cn-hongkong.aliyuncs.com/natfrp/frpc
         restart: always
         network_mode: host
-        command: --disable_log_color -f egtifakvnl6cqphr,23927631
+        command: --disable_log_color -f egtifakvnl6cqphr:23927631
