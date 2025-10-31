@@ -5,7 +5,7 @@ services:
         image: registry.cn-hongkong.aliyuncs.com/natfrp/frpc
         restart: always
         network_mode: host
-        command: --disable_log_color -f egtifakvnl6cqphr:23927631
+        command: -f egtifakvnl6cqphr:23927631
         volumes:
             # 单机模式：挂载一个数据目录
             - ./.frpc-data:/run/frpc
