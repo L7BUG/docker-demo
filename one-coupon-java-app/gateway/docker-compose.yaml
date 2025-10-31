@@ -8,9 +8,6 @@ services:
             TZ: Asia/Shanghai
             SPRING_PROFILES_ACTIVE: docker
         restart: always
-        volumes:
-            # 单机模式：挂载一个数据目录
-            - ./.frpc-data:/run/frpc
 networks:
     one-coupon-network: # 隔离网络提升安全性
         external: true  # 关键：声明此网络已在外部创建
