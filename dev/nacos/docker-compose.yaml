@@ -1,0 +1,38 @@
+version: "3.8"
+services:
+    nacos:
+        image: nacos/nacos-server:${NACOS_VERSION}
+        env_file:
+          - ./nacos-standalone-mysql.env
+        ports:
+          - "18848:8848"
+          - "19848:9848"
+        depends_on:
+          mysql:
+            condition: service_healthy
+        restart: always
+        networks:
+            - dev-network
+    mysql:
+        restart: always
+        image: nacos/mysql:8.0.31
+        env_file:
+            - ./mysql.env
+        volumes:
+            - dev-nacos-mysql-data:/var/lib/mysql
+        healthcheck:
+            test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+            interval: 5s
+            timeout: 10s
+            retries: 10
+        networks:
+            - dev-network
+
+volumes:
+    dev-nacos-mysql-data:
+
+networks:
+    dev-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
+
+
