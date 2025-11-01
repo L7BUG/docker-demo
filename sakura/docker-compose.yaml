@@ -5,7 +5,7 @@ services:
         image: registry.cn-hongkong.aliyuncs.com/natfrp/frpc
         restart: always
         network_mode: host
-        command: -f 0ohtu0amuvdsgdsny5d3xw0xzaz0ud1b:23255854
+        command: -f egtifakvnl6cqphr:23927631,23950685
         volumes:
             # 单机模式：挂载一个数据目录
             - ./.frpc-data:/run/frpc
