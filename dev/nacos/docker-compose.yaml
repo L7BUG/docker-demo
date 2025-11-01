@@ -15,7 +15,7 @@ services:
             - dev-network
     mysql:
         restart: always
-        image: nacos/mysql:8.0.31
+        image: registry.cn-shenzhen.aliyuncs.com/public-l7bug-dev/nacos-mysql:20251101
         env_file:
             - ./mysql.env
         volumes:
