@@ -3,8 +3,8 @@ services:
     dev-redis:
         image: redis:8-alpine
         restart: always                 # 自动重启保障服务可用性
-        ports:
-            - "16379:6379"      # 暴露默认端口
+#        ports:
+#            - "16379:6379"      # 暴露默认端口
         volumes:
             - dev-redis-data:/data              # 数据持久化目录
         environment:
