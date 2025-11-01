@@ -1,5 +1,19 @@
 version: '3.8'
 services:
+    dev-postgres-0:
+        image: postgres:18
+        restart: always
+#        ports:
+#            - "15432:5432"
+        environment:
+            POSTGRES_USER: admin
+            POSTGRES_PASSWORD: 123456
+            TZ: Asia/Shanghai
+            PGTZ: Asia/Shanghai
+        networks:
+            - dev-network
+        volumes:
+            - dev-postgres-data-0:/var/lib/postgresql
     dev-postgres-1:
         image: postgres:18
         restart: always
@@ -30,6 +44,7 @@ services:
             - dev-postgres-data-2:/var/lib/postgresql
 
 volumes:
+    dev-postgres-data-0:  # 命名卷确保数据安全
     dev-postgres-data-1:  # 命名卷确保数据安全
     dev-postgres-data-2:  # 命名卷确保数据安全
 
