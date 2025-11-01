@@ -1,7 +1,7 @@
 version: '3.8'
 services:
     dev-redis:
-        image: redis
+        image: redis:8-alpine
         restart: always                 # 自动重启保障服务可用性
 #        ports:
 #            - "16379:6379"      # 暴露默认端口
@@ -9,11 +9,6 @@ services:
             - dev-redis-data:/data              # 数据持久化目录
         environment:
             - TZ=Asia/Shanghai         # 时区设置
-        networks:
-            - dev-network
+        network_mode: "host"
 volumes:
     dev-redis-data:  # 命名卷确保数据安全
-
-networks:
-    dev-network: # 隔离网络提升安全性
-        external: true  # 关键：声明此网络已在外部创建
