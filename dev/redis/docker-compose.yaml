@@ -1,16 +1,12 @@
 version: '3.8'
 services:
     dev-redis:
-        image: registry.cn-shenzhen.aliyuncs.com/public-image-l/redis
-        restart: always  # 容器异常退出时自动重启
-        ports:
-            - "16379:6379"      # 暴露默认端口
+        image: redis:8-alpine  # 使用特定版本
+        restart: always
         volumes:
-            - dev-redis-data:/data              # 数据持久化目录
+            - dev-redis-data:/data
         environment:
-            - TZ=Asia/Shanghai         # 时区设置
-        sysctls: # 性能优化参数
-            - net.core.somaxconn=1024
+            - TZ=Asia/Shanghai
         networks:
             - dev-network
 
