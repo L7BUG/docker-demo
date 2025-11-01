@@ -1,19 +1,22 @@
 version: '3.8'
 services:
     dev-redis:
-        image: redis
-        restart: always                 # 自动重启保障服务可用性
+        image: redis:7-alpine  # 使用特定版本
+        restart: always
+        ports:
+            - "6379:6379"
         volumes:
-            - dev-redis-data:/data              # 数据持久化目录
+            - dev-redis-data:/data
         environment:
-            - TZ=Asia/Shanghai         # 时区设置
-            - REDIS_PASSWORD=123456
+            - TZ=Asia/Shanghai
+            - REDIS_PASSWORD=  # 如果需要密码验证
+        command: redis-server --bind 0.0.0.0 --requirepass ""  # 显式配置
         networks:
             - dev-network
-        command: redis-server --bind 0.0.0.0 --requirepass ""  # 显式配置
+
 volumes:
-    dev-redis-data:  # 命名卷确保数据安全
+    dev-redis-data:
 
 networks:
-    dev-network: # 隔离网络提升安全性
-        external: true  # 关键：声明此网络已在外部创建
+    dev-network:
+        external: true
