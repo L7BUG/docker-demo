@@ -13,7 +13,7 @@ services:
         networks:
             - dev-network
         volumes:
-            - dev-postgres-data-1:/var/lib/postgresql/18/docker
+            - dev-postgres-data-1:/var/lib/postgresql
     dev-postgres-2:
         image: postgres:18
         restart: always
@@ -27,7 +27,7 @@ services:
         networks:
             - dev-network
         volumes:
-            - dev-postgres-data-2:/var/lib/postgresql/18/docker
+            - dev-postgres-data-2:/var/lib/postgresql
 
 volumes:
     dev-postgres-data-1:  # 命名卷确保数据安全
