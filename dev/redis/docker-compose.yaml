@@ -7,9 +7,10 @@ services:
             - dev-redis-data:/data              # 数据持久化目录
         environment:
             - TZ=Asia/Shanghai         # 时区设置
-            - bind=0.0.0.0
+            - REDIS_PASSWORD=123456
         networks:
             - dev-network
+        command: redis-server --bind 0.0.0.0 --requirepass ""  # 显式配置
 volumes:
     dev-redis-data:  # 命名卷确保数据安全
 
