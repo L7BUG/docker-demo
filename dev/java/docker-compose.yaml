@@ -4,6 +4,8 @@ services:
         image: eclipse-temurin:21
         networks:
             - dev-network
+        environment:
+            TZ: Asia/Shanghai
 
 networks:
     dev-network: # 隔离网络提升安全性
