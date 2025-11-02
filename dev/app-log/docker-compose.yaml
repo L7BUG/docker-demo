@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+    one-coupon-gateway:
+        image: one-coupon/app-log:1.0.1-SNAPSHOT
+        container_name: app-log
+        environment:
+            TZ: Asia/Shanghai
+            SPRING_PROFILES_ACTIVE: dev
+        restart: always
+        networks:
+            - dev-network
+
+networks:
+    dev-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
