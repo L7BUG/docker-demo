@@ -1,7 +1,7 @@
 version: "3.8"
 services:
     nacos:
-        image: nacos/nacos-server:${NACOS_VERSION}
+        image: nacos/nacos-server:v3.1.0
         env_file:
           - ./nacos-standalone-mysql.env
         ports:
