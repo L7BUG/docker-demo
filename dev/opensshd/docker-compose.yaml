@@ -8,8 +8,8 @@ services:
 #            - PASSWORD_ACCESS=true
 #            - USER_PASSWORD=123456
 #            - USER_NAME=openssh-dev
-#        ports:
-#            - "2222:2222"  # 将主机的2222端口映射到容器的22端口(SSH)
+        ports:
+          - "2222:2222"  # 将主机的2222端口映射到容器的22端口(SSH)
 #        volumes:
 #            - ./.config-data:/config  # 持久化存储SSH配置
         networks:
