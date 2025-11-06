@@ -8,10 +8,10 @@ services:
             - bytebase:/var/opt/bytebase
         restart: unless-stopped
         networks:
-            - one-coupon-network
+            - dev-network
 
 volumes:
     bytebase:
 networks:
-    one-coupon-network: # 隔离网络提升安全性
-        external: true  # 关键：声明此网络已在外部创建
+    dev-network:
+        external: true
