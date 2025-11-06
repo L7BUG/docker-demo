@@ -1,0 +1,17 @@
+services:
+    bytebase:
+        image: bytebase/bytebase:latest
+        container_name: bytebase
+        ports:
+            - "48080:8080"
+        volumes:
+            - bytebase:/var/opt/bytebase
+        restart: unless-stopped
+        networks:
+            - dev-network
+
+volumes:
+    bytebase:
+networks:
+    dev-network:
+        external: true
