@@ -3,8 +3,8 @@ services:
     dev-postgres-0:
         image: postgres:18
         restart: always
-#        ports:
-#            - "15432:5432"
+        ports:
+            - "15432:5432"
         environment:
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: 123456
@@ -17,8 +17,8 @@ services:
     dev-postgres-1:
         image: postgres:18
         restart: always
-#        ports:
-#            - "15432:5432"
+        ports:
+            - "25432:5432"
         environment:
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: 123456
@@ -31,8 +31,8 @@ services:
     dev-postgres-2:
         image: postgres:18
         restart: always
-#        ports:
-#            - "15432:5432"
+        ports:
+            - "35432:5432"
         environment:
             POSTGRES_USER: admin
             POSTGRES_PASSWORD: 123456
