@@ -10,6 +10,9 @@ services:
             - pulsarconf:/pulsar/conf
         command: bin/pulsar standalone
         restart: unless-stopped
+        environment:
+            TZ: Asia/Shanghai
+            PULSAR_MEM: "-Xms512m -Xmx512m"
 
 volumes:
     pulsardata:
