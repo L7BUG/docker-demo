@@ -1,29 +1,16 @@
-version: '3.3'
 services:
-    # Pulsar 单机模式(含内置ZooKeeper / BookKeeper)
-    pulsar:
-        image: apachepulsar/pulsar
+    pulsar-standalone:
+        image: apachepulsar/pulsar:4.1.1
         container_name: pulsar-standalone
         ports:
-            - "16650:6650"   # Broker 服务端口，用于客户端连接
-            - "18080:8080"   # Web 管理界面端口
-        command: bin/pulsar standalone
+            - "16650:6650"
+            - "18080:8080"
         volumes:
-            - ./.pulsar-data:/pulsar/data   # 数据持久化
-#            - ./.pulsar-conf-data:/pulsar/conf   # 配置文件(可选)
-        environment:
-            TZ: Asia/Shanghai
-            PULSAR_MEM: "-Xms512m -Xmx512m"  # JVM 内存配置
+            - pulsardata:/pulsar/data
+            - pulsarconf:/pulsar/conf
+        command: bin/pulsar standalone
+        restart: unless-stopped
 
-    # Pulsar Manager 可视化控制台 (可选)
-#    pulsar-manager:
-#        image: apachepulsar/pulsar-manager
-#        container_name: pulsar-manager
-#        ports:
-#            - "9527:9527"   # Web 访问端口
-#            - "7750:7750"   # 后台服务端口
-#        environment:
-#            SPRING_CONFIGURATION_FILE: /pulsar-manager/pulsar-manager/application.properties
-#            REDIRECT_HOST: http://127.0.0.1
-#        depends_on:
-#            - pulsar
+volumes:
+    pulsardata:
+    pulsarconf:
