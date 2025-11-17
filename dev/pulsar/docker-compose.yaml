@@ -38,7 +38,7 @@ services:
             # JVM 配置
             PULSAR_MANAGER_JVM_OPTS: "-Xmx1g -Xms512m"
         depends_on:
-            pulsar:
+            pulsar-standalone:
                 condition: service_healthy
         volumes:
             - ./.pulsar-manager-data:/data
