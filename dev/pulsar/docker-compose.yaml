@@ -10,7 +10,7 @@ services:
         command: bin/pulsar standalone
         volumes:
             - ./.pulsar-data:/pulsar/data   # 数据持久化
-            - ./.pulsar-conf-data:/pulsar/conf   # 配置文件(可选)
+#            - ./.pulsar-conf-data:/pulsar/conf   # 配置文件(可选)
         environment:
             TZ: Asia/Shanghai
             PULSAR_MEM: "-Xms512m -Xmx512m"  # JVM 内存配置
