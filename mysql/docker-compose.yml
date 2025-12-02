@@ -10,8 +10,8 @@ services:
         #      MYSQL_DATABASE: example_db  # 初始化数据库名
         #      MYSQL_USER: example_user  # 初始化用户名
         #      MYSQL_PASSWORD: example_user_password  # 初始化用户密码
-        #    ports:
-        #      - "3306:3306"  # 将宿主机的3306端口映射到容器的3306端口
+        ports:
+          - "3306:3306"  # 将宿主机的3306端口映射到容器的3306端口
         volumes:
             - ./.mysql-data:/var/lib/mysql  # 数据持久化路径
 #      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro  # 自定义初始化SQL脚本
