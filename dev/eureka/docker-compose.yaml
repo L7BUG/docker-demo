@@ -1,0 +1,50 @@
+services:
+    eureka-01:
+        image: eureka:1.0-SNAPSHOT
+        container_name: eureka-01
+        environment:
+            - TZ=Asia/Shanghai
+            # 1. 修改服务内部端口 (Spring 变量覆盖)
+            - SERVER_PORT=18761
+            # 2. 修改 Eureka 注册地址 (注意变量名规范：大写并用下划线代替点和横杠)
+            # 注意：defaultZone 比较特殊，通常建议用下面的格式以确保精确匹配
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-02:28761/eureka/,http://eureka-03:38761/eureka/
+        ports:
+            - "18761:18761" # 映射宿主机端口:容器内部端口
+        restart: always
+        networks:
+            - dev-network
+    eureka-02:
+        image: eureka:1.0-SNAPSHOT
+        container_name: eureka-02
+        environment:
+            - TZ=Asia/Shanghai
+            # 1. 修改服务内部端口 (Spring 变量覆盖)
+            - SERVER_PORT=28761
+            # 2. 修改 Eureka 注册地址 (注意变量名规范：大写并用下划线代替点和横杠)
+            # 注意：defaultZone 比较特殊，通常建议用下面的格式以确保精确匹配
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-01:18761/eureka/,http://eureka-03:38761/eureka/
+        ports:
+            - "28761:28761" # 映射宿主机端口:容器内部端口
+        restart: always
+        networks:
+            - dev-network
+    eureka-03:
+        image: eureka:1.0-SNAPSHOT
+        container_name: eureka-03
+        environment:
+            - TZ=Asia/Shanghai
+            # 1. 修改服务内部端口 (Spring 变量覆盖)
+            - SERVER_PORT=38761
+            # 2. 修改 Eureka 注册地址 (注意变量名规范：大写并用下划线代替点和横杠)
+            # 注意：defaultZone 比较特殊，通常建议用下面的格式以确保精确匹配
+            - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://eureka-02:28761/eureka/,http://eureka-01:18761/eureka/
+        ports:
+            - "38761:38761" # 映射宿主机端口:容器内部端口
+        restart: always
+        networks:
+            - dev-network
+
+networks:
+    dev-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
