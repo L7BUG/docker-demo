@@ -1,0 +1,15 @@
+services:
+    aot-demo:
+        image: aot-demo:1.0-SNAPSHOT
+        container_name: aot-demo
+        environment:
+            - TZ=Asia/Shanghai
+            - SERVER_PORT=19999
+        ports:
+            - "19999:19999" # 映射宿主机端口:容器内部端口
+        restart: always
+        networks:
+            - dev-network
+networks:
+    dev-network: # 隔离网络提升安全性
+        external: true  # 关键：声明此网络已在外部创建
