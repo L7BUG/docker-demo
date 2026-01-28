@@ -1,47 +1,23 @@
 services:
-    pulsar-standalone:
-        image: apachepulsar/pulsar:4.1.1
+    pulsar:
+        image: apachepulsar/pulsar:latest
         container_name: pulsar-standalone
+        hostname: pulsar
+        restart: always
+        # 开放 6650 (二进制协议) 和 8080 (HTTP 管理接口)
         ports:
             - "16650:6650"
             - "18080:8080"
+        environment:
+            # 限制内存使用（Pulsar 默认内存分配较高，本地测试建议调小）
+            - PULSAR_MEM=-Xms512m -Xmx512m -XX:MaxDirectMemorySize=1g
+            # 开启延时队列功能（虽然 latest 默认通常开启，但显式声明更稳）
+            - PULSAR_PREFIX_delayedDeliveryEnabled=true
         volumes:
-            - pulsardata:/pulsar/data
-            - pulsarconf:/pulsar/conf
+            - dev-pulsar-data:/pulsar/data
+            - dev-pulsar-conf:/pulsar/conf
+        # 使用 standalone 模式启动
         command: bin/pulsar standalone
-        restart: unless-stopped
-        environment:
-            TZ: Asia/Shanghai
-            PULSAR_MEM: "-Xms512m -Xmx512m"
-    # Pulsar Manager
-    pulsar-manager:
-        image: apachepulsar/pulsar-manager:v0.4.0
-        container_name: pulsar-manager
-        hostname: pulsar-manager
-        ports:
-            - "19527:9527"    # Pulsar Manager Web 界面
-            - "17750:7750"    # 后端服务端口
-        environment:
-            # 数据库配置（使用内置H2数据库）
-            SPRING_PROFILES_ACTIVE: production
-            SPRING_CONFIGURATION_PREVENTCIRCULARREFERENCE: "false"
-
-            # Pulsar 集群配置
-            PULSAR_CLUSTER_CLUSTER_NAME: "standalone"
-            PULSAR_CLUSTER_URL: "http://pulsar-standalone:8080"
-            PULSAR_CLUSTER_BROKER_URL: "pulsar://pulsar-standalone:6650"
-
-            # 管理员账户配置
-            PULSAR_MANAGER_USER: "admin"
-            PULSAR_MANAGER_PASSWORD: "admin123"
-
-            # JVM 配置
-            PULSAR_MANAGER_JVM_OPTS: "-Xmx1g -Xms512m"
-        depends_on:
-            pulsar-standalone:
-                condition: service_healthy
-        volumes:
-            - ./.pulsar-manager-data:/data
 volumes:
-    pulsardata:
-    pulsarconf:
+    dev-pulsar-data:
+    dev-pulsar-conf:
