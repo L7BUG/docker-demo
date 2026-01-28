@@ -18,6 +18,15 @@ services:
             - dev-pulsar-conf:/pulsar/conf
         # 使用 standalone 模式启动
         command: bin/pulsar standalone
+    pulsar-express:
+        image: bbonnin/pulsar-express:latest
+        container_name: pulsar-express
+        restart: always
+        ports:
+            - "13000:3000"
+        environment:
+            # 直接指向你的 Pulsar 地址
+            - PE_CONNECTION_URL=http://pulsar:8080
 volumes:
     dev-pulsar-data:
     dev-pulsar-conf:
